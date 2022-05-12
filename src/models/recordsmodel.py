@@ -1,5 +1,5 @@
-from psycopg2 import connection
 from database.db import get_connection_db
+
 from .entities.records import Record_List
 
 class RecordModel():
@@ -16,7 +16,8 @@ class RecordModel():
                 
                 for row in resultset:
                     record = Record_List(row[0],row[1],row[3])
-                    list_record.append(record)
+                    print(record)
+                   #list_record.append(record.to_JSON())
             connection.close()
             return  list_record
         except Exception as ex:

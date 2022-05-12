@@ -2,7 +2,7 @@ from flask import Flask
 from config import config
 
 # Routes
-#from routes import records_route
+from routes import records_route
 
 app = Flask(__name__)
 
