@@ -16,9 +16,9 @@ def get_connection_db():
                 'ssl_disabled': True
             }
         
-        cnx = mysql.connector.connect(**mysql_config)
+        cnxn_mysql = mysql.connector.connect(**mysql_config)
+        return cnxn_mysql
         if cnx.is_connected():
-            return cnx
             print('connected to database') 
 
     except Error as e:
