@@ -19,7 +19,7 @@ def get_connection_db():
         cnxn_mysql = mysql.connector.connect(**mysql_config)
         return cnxn_mysql
         if cnx.is_connected():
-            print('connected to database') 
+            print("connected to database") 
 
     except Error as e:
             print("mysql DB connection error")
