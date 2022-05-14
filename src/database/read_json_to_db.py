@@ -1,8 +1,10 @@
 import json
 import pandas as pd 
 import simplejson as json
+import pgeocode
 from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="geoapiExercises")
+data = pgeocode.Nominatim('MX')
 
 
 # Opening JSON file
@@ -22,11 +24,12 @@ dict_table_records={"id":[],"date_updated":[],"vehicle_id":[],
                     "vehicle_label":[],"vehicle_status":[],"geographic_point":[],
                     "position_odometer":[],"position_speed":[]}
 
-
 dict_table_ubication={"vehicle_id":[],"postal_code":[],"alcaldia_name":[],
-                    "highway":[],"place_name":[],"road":[],"neighbourhood":[]}
+                    "highway":[],"road":[],"neighbourhood":[] }
 
 list_geographic_point=[]
+
+df_list_Value_codezip=pd.DataFrame(dtype = 'object')
 
 for record in list_records:
     for key,value in record.items():   
@@ -65,17 +68,49 @@ for record in list_records:
 count = 0
 for point in list_geographic_point:
     
-    if count < 5:
+    if count < 2:
         location = geolocator.reverse(point)
         address = location.raw['address']
-        print("\n",type(address))
+        #print("\n",type(address))
+        for key,value in address.items(): 
+            #print(key," -- ", value,"\n")
+            if key == "postcode":                 
+                dict_table_ubication['postal_code'].append(value)
+                serie_for_search_code= data.query_postal_code(value)
+                df_for_search_code = serie_for_search_code.to_frame()               
+                df_for_search_code=df_for_search_code.T
+                df_for_search_code.drop(columns=['accuracy','latitude','longitude'],inplace=True)
+                
+                #concat df_list_Value_codezip +  df_for_search_code 
+                df_list_Value_codezip = pd.concat([df_list_Value_codezip, df_for_search_code], ignore_index = True, axis = 0)
+                                    
+            if key == "highway":                 
+                dict_table_ubication['highway'].append(value)
+
+            if key == "road":                 
+                dict_table_ubication['road'].append(value)
+
+            if key == "neighbourhood":                 
+                dict_table_ubication['neighbourhood'].append(value)
+
+  
+        
+        
         count+=1
     else:break
 
-# #pass dict_table_ubication to df_raw_table_ubication
-# df_raw_table_ubication = pd.DataFrame.from_dict(dict_table_ubication,orient='index')
-# df_raw_table_ubication=df_raw_table_ubication.T
-# print(df_raw_table_ubication)
+#print(df_list_Value_codezip)
+
+#pass dict_table_ubication to df_raw_table_ubication
+df_raw_table_ubication = pd.DataFrame.from_dict(dict_table_ubication,orient='index')
+df_raw_table_ubication=df_raw_table_ubication.T
+#print(df_raw_table_ubication)
+
+df_table_ubication= df_raw_table_ubication.merge(df_list_Value_codezip, on='postal_code')
+print(df_table_ubication)
+
+df_table_ubication.info(verbose=True)
+
 
 # # Closing file
 file_json.close()
