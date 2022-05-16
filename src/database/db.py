@@ -2,8 +2,10 @@
 import mysql.connector
 from mysql.connector import Error
 from decouple import config
+import pyodbc
+from sqlalchemy import create_engine
 
-def get_connection_db():
+def get_connection_read_records():
    
     try:
    
@@ -17,6 +19,7 @@ def get_connection_db():
             }
         
         cnxn_mysql = mysql.connector.connect(**mysql_config)
+    
         return cnxn_mysql
         if cnx.is_connected():
             print("connected to database") 
@@ -24,10 +27,25 @@ def get_connection_db():
     except Error as e:
             print("mysql DB connection error")
             print(e)
-            
+                
     
-    
+def get_conexion_save_dataframe():
+       
+    try:   
+        return create_engine("mysql+pymysql://{user}:{pw}@{host}:{port}/{db}"
+ 				.format(host=config('MYSQL_HOST'),
+                        db=config('MYSQL_DATABASE'),
+                        port=config('MYSQL_PORT') ,
+                        user=config('MYSQL_USER'),
+                        pw=config('MYSQL_PASSWORD')))
 
+    except Error as e:
+            print("mysql DB connection error")
+            print(e)
+        
+        
+        
+        
 # try: 
        
 #         psycopg2.connect(
