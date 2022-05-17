@@ -1,5 +1,6 @@
 import json
 from utils.dateformat_value import DateFormat
+
 class get_all_records():
     def __init__(self,id,date_updated=None,vehicle_id=None,vehicle_label=None,
                             vehicle_status=None,geographic_point=None,position_odometer=None,position_speed=None) -> None:
@@ -25,8 +26,6 @@ class get_all_records():
                     'position_speed': self.position_speed                       
                     }   
             
-          
-
 class get_unit_location_by_id():
     
     def __init__(self,vehicle_id,                
@@ -83,7 +82,6 @@ class get_municipal_available():
                 'mayors_name':  self.mayors              
                 }  
    
-
 class get_municipal_units():
     def __init__(self,units) -> None:
         
