@@ -21,7 +21,7 @@ def get_connection_read_records():
         cnxn_mysql = mysql.connector.connect(**mysql_config)
     
         return cnxn_mysql
-        if cnx.is_connected():
+        if cnxn_mysql.is_connected():
             print("connected to database") 
 
     except Error as e:

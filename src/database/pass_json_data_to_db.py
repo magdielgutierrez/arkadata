@@ -135,13 +135,13 @@ if __name__ == '__main__':
     else:
            print( '¡Ups!. No hemos encontrados registros nuevos...!')
        
-    #save record ubication to db MYSQL 
-    table_ubication =save_records_to_table_ubication(list_geographic_point,df_list_value_codezip)
-    #print(table_ubication)
+    # #save record ubication to db MYSQL 
+    # table_ubication =save_records_to_table_ubication(list_geographic_point,df_list_value_codezip)
+    # #print(table_ubication)
 
-    if table_ubication.shape[0] > 0:
-            table_ubication.to_sql('ubication', con=engine_cnxn_save_dataframe, if_exists ='append', index=False) 
-            print('¡Enhorabuena!.Haz ingresado {} registros nuevos.'.format(table_ubication.shape[0]) )
-    else:
-           print( '¡Ups!. No hemos encontrados registros nuevos...!')
+    # if table_ubication.shape[0] > 0:
+    #         table_ubication.to_sql('ubication', con=engine_cnxn_save_dataframe, if_exists ='append', index=False) 
+    #         print('¡Enhorabuena!.Haz ingresado {} registros nuevos.'.format(table_ubication.shape[0]) )
+    # else:
+    #        print( '¡Ups!. No hemos encontrados registros nuevos...!')
     
