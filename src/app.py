@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 
 # Routes
-from routes import records_route
+from routes import list_route_for_app
 
 app = Flask(__name__)
 CORS(app, resources={"*":{"origins":"http://localhost:9393"}})
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     app.config.from_object(config['development'])
     
     # Blueprints
-    app.register_blueprint(records_route.main, url_prefix='/api/records')
+    app.register_blueprint(list_route_for_app.main, url_prefix='/api/records')
     
     # Error handlers 
     app.register_error_handler(404, page_not_found)

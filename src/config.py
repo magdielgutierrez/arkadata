@@ -7,7 +7,7 @@ class Config:
     
 class DevelopmentConfig(Config):
     DEBUG=True
-    port= 6565
+    PORT= 6565
 
 config={
     'development': DevelopmentConfig
