@@ -3,7 +3,7 @@ from flask import jsonify
 from pandas import json_normalize
 from database.db import get_connection_read_records,get_conexion_save_dataframe
 from .entities.records import Record_List
-from .entities.ent_get_ubication import Get_Ubication_by_ID
+from .entities.ent_get_unit_location_by_id import get_unit_location_by_id,get_available_units
 
 
 class RecordModel():
@@ -43,14 +43,23 @@ class RecordModel():
 	                    FROM records AS RD INNER JOIN ubication as UT ON RD.vehicle_id=UT.vehicle_id 
                         WHERE RD.vehicle_id={}""".format(id)
                  
-           
             try:
                 connection=get_conexion_save_dataframe()
-                rowrecord= connection.execute(mysql_query).fetchone()
-               # print(rowrecord)                                              
-                record=Get_Ubication_by_ID(rowrecord[0],rowrecord[1],rowrecord[2],rowrecord[2],rowrecord[3],rowrecord[4],rowrecord[5],rowrecord[6],rowrecord[7],rowrecord[8],rowrecord[9])
-                # print(record)
-                # print(record.to_JSON() )       
+                rowrecord= connection.execute(mysql_query).fetchone()                                            
+                record=get_unit_location_by_id(rowrecord[0],rowrecord[1],rowrecord[2],rowrecord[2],rowrecord[3],rowrecord[4],rowrecord[5],rowrecord[6],rowrecord[7],rowrecord[8],rowrecord[9])
+                return record.to_JSON()
+            except Exception as ex:
+                raise Exception(ex)
+            
+    @classmethod
+    def get_list_of_available_units(self):
+        
+            mysql_query ="SELECT vehicle_id FROM `records`WHERE vehicle_status=1"
+                 
+            try:
+                connection=get_conexion_save_dataframe()
+                rowrecord= connection.execute(mysql_query).fetchaall()                                            
+                record=get_available_units(rowrecord[0])
                 return record.to_JSON()
             except Exception as ex:
                 raise Exception(ex)

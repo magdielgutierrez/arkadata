@@ -1,5 +1,6 @@
 import json
-class Get_Ubication_by_ID():
+class get_unit_location_by_id():
+    
     def __init__(self,vehicle_id,                
                     geographic_point=None,  postal_code=None,country_code=None,
                     community_name=None,state_name=None, road=None,neighbourhood=None,highway=None,place_name=None,
@@ -33,4 +34,16 @@ class Get_Ubication_by_ID():
                 'place_name': self.place_name,
                 'alcaldia_name'  : self.alcaldia_name                         
                 }  
-    
+ 
+ 
+ 
+class get_available_units():
+    def __init__(self,vehicle_id) -> None:
+        
+        self.vehicle_id=vehicle_id
+                
+    def to_JSON(self):
+          return {   
+                'vehicle_id': self.vehicle_id               
+                }  
+       
