@@ -10,10 +10,10 @@ main = Blueprint('list_records',__name__)
 def get_records():
     try:
 
-        list_of_records = RecordModel.get_records()
+        list_of_records = RecordModel.get_all_records()
         return jsonify(list_of_records)
     except Exception as ex:
-        return jsonify({'message':'Hola tenemos un error'})
+        return jsonify({'message':'Hola no encontramos ningun registros'}),500
  
 @main.route('/<id>')
 def get_ubication_for_id(id):

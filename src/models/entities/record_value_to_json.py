@@ -1,4 +1,32 @@
 import json
+from utils.dateformat_value import DateFormat
+class get_all_records():
+    def __init__(self,id,date_updated=None,vehicle_id=None,vehicle_label=None,
+                            vehicle_status=None,geographic_point=None,position_odometer=None,position_speed=None) -> None:
+            self.id=id
+            self.date_updated=date_updated
+            self.vehicle_id=vehicle_id
+            self.vehiclelabel=vehicle_label
+            self.vehicle_status=vehicle_status
+            self.geographic_point=geographic_point
+            self.position_odometer=position_odometer
+            self.position_speed=position_speed
+                    
+    def to_JSON(self):
+           
+            return {   
+                    'id': self.id,
+                    'date_updated': DateFormat.convert_date(self.date_updated),
+                    'vehicle_id':self.vehicle_id,
+                    'vehicle_label': self.vehiclelabel,
+                    'vehicle_status': self.vehicle_status,
+                    'geographic_point':self.geographic_point,
+                    'position_odometer':self.position_odometer,
+                    'position_speed': self.position_speed                       
+                    }   
+            
+          
+
 class get_unit_location_by_id():
     
     def __init__(self,vehicle_id,                
@@ -43,8 +71,7 @@ class get_available_units():
     def to_JSON(self):
           return {   
                 'vehicle_id': self.vehicle_id               
-                }  
-          
+                }         
 
 class get_municipal_available():
     def __init__(self,mayors) -> None:
