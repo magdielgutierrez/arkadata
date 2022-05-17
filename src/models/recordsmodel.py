@@ -3,7 +3,8 @@ from flask import jsonify
 from pandas import json_normalize
 from database.db import get_connection_read_records,get_conexion_save_dataframe
 from .entities.records import Record_List
-from .entities.ent_get_unit_location_by_id import get_unit_location_by_id,get_available_units
+from .entities.record_value_to_json import get_unit_location_by_id,get_available_units,get_mayors_available
+
 
 
 class RecordModel():
@@ -53,13 +54,37 @@ class RecordModel():
             
     @classmethod
     def get_list_of_available_units(self):
-        
-            mysql_query ="SELECT vehicle_id FROM `records`WHERE vehicle_status=1"
-                 
+            list_units=[]
+            mysql_query ="SELECT vehicle_id FROM records WHERE vehicle_status=1"
+           
             try:
                 connection=get_conexion_save_dataframe()
-                rowrecord= connection.execute(mysql_query).fetchaall()                                            
-                record=get_available_units(rowrecord[0])
-                return record.to_JSON()
+                resultset= connection.execute(mysql_query).fetchall()  
+                
+                for row in resultset:
+                    units=get_available_units(row[0])
+                    list_units.append(units.to_JSON())
+                    
+                return list_units
+            
+            except Exception as ex:
+                raise Exception(ex)
+            
+    @classmethod
+    def get_list_of_mayors_available(self):
+        
+            mysql_query ="SELECT alcaldia_name FROM ubication WHERE alcaldia_name IS NOT NULL GROUP BY alcaldia_name"     
+            list_mayors=[]
+            print('Hola mundo nuevamente')
+            try:
+                connection=get_conexion_save_dataframe()
+                result= connection.execute(mysql_query).fetchall()  
+                
+                for row in result:
+                    mayors=get_mayors_available(row[0])
+                    list_mayors.append(mayors.to_JSON())
+                    
+                return list_mayors
+            
             except Exception as ex:
                 raise Exception(ex)

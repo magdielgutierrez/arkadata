@@ -35,8 +35,6 @@ class get_unit_location_by_id():
                 'alcaldia_name'  : self.alcaldia_name                         
                 }  
  
- 
- 
 class get_available_units():
     def __init__(self,vehicle_id) -> None:
         
@@ -46,4 +44,15 @@ class get_available_units():
           return {   
                 'vehicle_id': self.vehicle_id               
                 }  
-       
+          
+
+class get_mayors_available():
+    def __init__(self,mayors) -> None:
+        
+        self.mayors=mayors
+                
+    def to_JSON(self):
+          return {   
+                'mayors_name': 0               
+                }  
+   

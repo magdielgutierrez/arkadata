@@ -24,4 +24,26 @@ def get_ubication_for_id(id):
         else:
             return jsonify(ubication_id)
     except Exception as ex:
-        return jsonify({'message':'Hola tenemos un error para obtener la ubicacion'}),500
+        return jsonify({'message':'Hola no podemos obtener una ubicacion'}),500
+
+@main.route('/units')
+def get_available_units():
+    try:
+        list_available = RecordModel.get_list_of_available_units()
+        if list_available == None:
+            return jsonify({}),404
+        else:
+            return jsonify(list_available)
+    except Exception as ex:
+        return jsonify({'message':'No tenemos unidades disponibles en este momento'}),500
+
+main.route('/may')
+def get_mayors_available():
+    try:
+        list_mayors= RecordModel.get_list_of_mayors_available()
+        if list_mayors == None:
+            return jsonify({}),404
+        else:
+            return jsonify(list_mayors)
+    except Exception as ex:
+        return jsonify({'message':'Hola no hay alcaldias disponibles'}),500
