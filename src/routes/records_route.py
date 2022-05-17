@@ -37,14 +37,26 @@ def get_available_units():
     except Exception as ex:
         return jsonify({'message':'No tenemos unidades disponibles en este momento'}),500
 
-@main.route('/may')
+@main.route('/municipal')
 def get_mayors_available():
     try:
-        list_mayors= RecordModel.get_list_of_mayors_available()
+        list_mayors= RecordModel.get_list_of_municipal_available()
         if list_mayors == None:
             return jsonify({}),404
         else:
             return jsonify(list_mayors)
     except Exception as ex:
         return jsonify({'message':'Hola no hay alcaldias disponibles'}),500
+    
+
+@main.route('/search/<name>')
+def get_municipal_units(name):
+    try:
+        municipal_units= RecordModel.get_list_of_municipal_units(name)
+        if municipal_units == None:
+            return jsonify({}),404
+        else:
+            return jsonify(municipal_units)
+    except Exception as ex:
+        return jsonify({'message':'Hola no hay unidades en la alcaldia'}),500
     

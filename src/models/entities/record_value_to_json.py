@@ -46,7 +46,7 @@ class get_available_units():
                 }  
           
 
-class get_mayors_available():
+class get_municipal_available():
     def __init__(self,mayors) -> None:
         
         self.mayors=mayors
@@ -54,5 +54,16 @@ class get_mayors_available():
     def to_JSON(self):
           return {   
                 'mayors_name':  self.mayors              
+                }  
+   
+
+class get_municipal_units():
+    def __init__(self,units) -> None:
+        
+        self.units=units
+                
+    def to_JSON(self):
+          return {   
+                'units_id':  self.units              
                 }  
    
