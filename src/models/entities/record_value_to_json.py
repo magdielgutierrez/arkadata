@@ -53,6 +53,6 @@ class get_mayors_available():
                 
     def to_JSON(self):
           return {   
-                'mayors_name': 0               
+                'mayors_name':  self.mayors              
                 }  
    

@@ -37,7 +37,7 @@ def get_available_units():
     except Exception as ex:
         return jsonify({'message':'No tenemos unidades disponibles en este momento'}),500
 
-main.route('/may')
+@main.route('/may')
 def get_mayors_available():
     try:
         list_mayors= RecordModel.get_list_of_mayors_available()
@@ -47,3 +47,4 @@ def get_mayors_available():
             return jsonify(list_mayors)
     except Exception as ex:
         return jsonify({'message':'Hola no hay alcaldias disponibles'}),500
+    
