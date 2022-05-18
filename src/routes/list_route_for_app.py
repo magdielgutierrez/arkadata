@@ -7,6 +7,7 @@ from models.recordsmodel import RecordModel
 
 main = Blueprint('list_records',__name__)
 
+# Route principal
 @main.route('/')
 def get_home():
         return jsonify({'message':'Enhorabuena.. estas en el REST API de ArkaData'})

@@ -1,0 +1,8 @@
+# ignore file and  folders
+.git
+Dockerfile
+.gitignore
+.cache
+*/*__pycache__
+*/*.md
+.dockerignore
