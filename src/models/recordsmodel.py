@@ -6,7 +6,8 @@ from .entities.record_value_to_json import *
 
 class RecordModel():
     
-    @classmethod
+    # search with select all records and return JSON 
+    @classmethod 
     def get_all_records(self):
             list_units=[]
             mysql_query ="""SELECT id,date_updated,vehicle_id,vehicle_label, vehicle_status,vehicle_id
@@ -26,10 +27,9 @@ class RecordModel():
             except Exception as ex:
                 raise Exception(ex)
             
-            
-        
+    # search with select  location for ID  and return JSON    
     @classmethod
-    def get_records_for_id(self,id):
+    def get_ubication_for_id(self,id):
         
             mysql_query ="""SELECT  RD.vehicle_id,RD.geographic_point,UT.postal_code,UT.country_code,UT.community_name,UT.state_name,UT.road,UT.community_name,UT.neighbourhood,UT.highway,UT.place_name,UT.alcaldia_name
 	                    FROM records AS RD INNER JOIN ubication as UT ON RD.vehicle_id=UT.vehicle_id 
@@ -42,7 +42,8 @@ class RecordModel():
                 return record.to_JSON()
             except Exception as ex:
                 raise Exception(ex)
-            
+          
+    # search list avalibale units and return JSON 
     @classmethod
     def get_list_of_available_units(self):
             list_units=[]
@@ -61,6 +62,7 @@ class RecordModel():
             except Exception as ex:
                 raise Exception(ex)
             
+    # search list mayors and return JSON 
     @classmethod
     def get_list_of_municipal_available(self):
         
@@ -80,7 +82,7 @@ class RecordModel():
             except Exception as ex:
                 raise Exception(ex)
             
-            
+     # search list avalibale units by mayors and return JSON        
     @classmethod
     def get_list_of_municipal_units(self,name):
         

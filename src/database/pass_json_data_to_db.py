@@ -5,14 +5,14 @@ import pgeocode
 import time
 from geopy.geocoders import Nominatim
 
-from db import get_conexion_save_dataframe
+from db import get_conexion_mysql
 
 
 from sqlalchemy import create_engine
 
 geolocator = Nominatim(user_agent="geoapiExercises")
 data = pgeocode.Nominatim('MX')
-engine_cnxn_save_dataframe = get_conexion_save_dataframe()
+engine_cnxn_save_dataframe = get_conexion_mysql()
 
 # Define  dict_table_records base for table  records in database
 dict_table_records={"id":[],"date_updated":[],"vehicle_id":[],
@@ -130,18 +130,18 @@ if __name__ == '__main__':
     table_records= save_records_to_table_records(dict_data_records,list_geographic_point)
    
     if table_records.shape[0] > 0:
-            table_records.to_sql('records', con=engine_cnxn_save_dataframe, if_exists ='append', index=False) 
+           # table_records.to_sql('records', con=engine_cnxn_save_dataframe, if_exists ='append', index=False) 
             print('¡Enhorabuena!.Haz ingresado {} registros nuevos.'.format(table_records.shape[0]) )
     else:
            print( '¡Ups!. No hemos encontrados registros nuevos...!')
        
     # #save record ubication to db MYSQL 
-    # table_ubication =save_records_to_table_ubication(list_geographic_point,df_list_value_codezip)
-    # #print(table_ubication)
+    table_ubication =save_records_to_table_ubication(list_geographic_point,df_list_value_codezip)
 
-    # if table_ubication.shape[0] > 0:
-    #         table_ubication.to_sql('ubication', con=engine_cnxn_save_dataframe, if_exists ='append', index=False) 
-    #         print('¡Enhorabuena!.Haz ingresado {} registros nuevos.'.format(table_ubication.shape[0]) )
-    # else:
-    #        print( '¡Ups!. No hemos encontrados registros nuevos...!')
+
+    if table_ubication.shape[0] > 0:
+            #table_ubication.to_sql('ubication', con=engine_cnxn_save_dataframe, if_exists ='append', index=False) 
+            print('¡Enhorabuena!.Haz ingresado {} registros nuevos.'.format(table_ubication.shape[0]) )
+    else:
+           print( '¡Ups!. No hemos encontrados registros nuevos...!')
     

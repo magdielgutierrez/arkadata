@@ -22,10 +22,10 @@ if __name__ == '__main__':
     # Error handlers 
     app.register_error_handler(404, page_not_found)
     
-    # Run app development
-    app.run()
+    # # Run app development
+    # app.run()
     
-    #  # Run app production
-    # app.run(host='0.0.0.0', port=5000)
+     # Run app production
+    app.run(host='0.0.0.0', port=5000)
     
   
