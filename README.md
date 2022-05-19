@@ -4,14 +4,6 @@ Descripción:
 
 Desarrollar un pipeline de análisis de datos utilizando los datos abiertos de la Ciudad de México correspondientes a las ubicaciones de las unidades del metrobús para que pueda ser consultado mediante un API REST filtrando por unidad o por alcaldía.
 
-### Rutas:
-
-1. obtener lista de registros
-2. ddd
-3. dd
-4. 44
-5. 55
-
 ## Instrucciones
 
 Primero, crear un entorno virtual:
@@ -26,23 +18,30 @@ Crear un archivo .env (en la raíz del proyecto) para las variables de entorno:
 
     SECRET_KEY=SECRET_KEY
     
-    PGSQL_HOST=host
+    MYSQL_HOST=host
     
-    PGSQL_USER=user
+    MYSQL_USER=user
     
-    PGSQL_PASSWORD=password
+    MYSQL_PASSWORD=password
    
-    PGSQL_DB=database
+    MYSQL_DATABASE=database
+
+    MYSQL_PORT=database
     
  ## Dockerfile
  
- Crear imagen para docker
+ Crear contenedores
  
-    docker build -t restapi:v.1
+    docker-compose up -d
    
- Crear contenerdor
- 
-  docker run --name localrestapi -p 6000:5000 -d restapi:v.1
+### Rutas:
+Home  http://127.0.0.1:8000/api/
+
+  1. .../list  | Obtener lista de registros 
+  2. .../units | Obtener una lista de unidades disponibles  
+  3. .../<id de unidad> | Consultar la ubicación de una unidad dado su ID
+  4. .../municipal | Obtener una lista de alcaldías disponibles
+  5. .../<nombre de alcaldia> | Obtener la lista de unidades que se encuentren dentro de una alcaldía
  
  
  

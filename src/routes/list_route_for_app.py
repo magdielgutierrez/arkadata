@@ -15,7 +15,6 @@ main = Blueprint('list_records',__name__)
 def get_home():
         return jsonify({'message':'Enhorabuena.. estas en el REST API de ArkaData'})
  
- 
  # List all records
 @main.route('/list')
 def get_records():
