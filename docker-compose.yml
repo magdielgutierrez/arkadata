@@ -1,0 +1,18 @@
+version: "3.2"
+services:
+  app:
+    build: ./
+    links:
+      - db
+    ports:
+      - "8000:8000"
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      
+    volumes:
+      - ./src/database:/docker-entrypoint-initdb.d/:ro

@@ -7,18 +7,21 @@ COPY ./requirements.txt /app/requirements.txt
 # Create directory
 WORKDIR /app
 
-# Excecute udpate pip 
+# Execute udpate pip 
 RUN pip install --upgrade pip
 
-# Excecute install requirements in requirements.txt 
+# Execute apk MySQL password autentication
+RUN pip install cryptography
+
+# Execute install requirements in requirements.txt 
 RUN pip install -r requirements.txt
 
 # Copy the app folder
 COPY .  /app
 COPY /src /app/
 
-# Define port 5000
-EXPOSE 5000
+# Define port 8000
+EXPOSE 8000
 
 # Delete file requirements.txt
 RUN rm  /app/requirements.txt

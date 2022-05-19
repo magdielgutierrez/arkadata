@@ -16,6 +16,5 @@ def get_conexion_mysql():
                         pw=config('MYSQL_PASSWORD')))
 
     except Error as e:
-            print("mysql DB connection error")
-            print(e)
+            return e 
         

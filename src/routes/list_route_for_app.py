@@ -1,7 +1,9 @@
+from email import message
 from traceback import print_tb
 from flask import Blueprint, jsonify
 from sqlalchemy import null
 from utils.validaciones import *
+from database.db import get_conexion_mysql
 
 # Models
 from models.recordsmodel import RecordModel
@@ -79,3 +81,12 @@ def get_municipal_units(name):
         except Exception as ex:
             return jsonify({'message':'Hola no hay unidades en la alcaldia'}),500
       else: return jsonify({'mensaje': "Parámetros inválidos...", 'Action': False})
+
+
+# Get  conexion db
+@main.route('/db')
+def get_cxn_db_message():
+    msg= get_conexion_mysql()
+    return jsonify({'message': '{}'.format(msg)})
+    
+   
