@@ -14,7 +14,8 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the app folder
-COPY . /app
+COPY .  /app
+COPY /src /app/
 
 # Define port 5000
 EXPOSE 5000
