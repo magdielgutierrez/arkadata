@@ -39,9 +39,9 @@ Home  http://127.0.0.1:8000/api/
 
   1. .../list  | Obtener lista de registros 
   2. .../units | Obtener una lista de unidades disponibles  
-  3. .../<id de unidad> | Consultar la ubicación de una unidad dado su ID
+  3. .../{vehicule_id} | Consultar la ubicación de una unidad dado su ID
   4. .../municipal | Obtener una lista de alcaldías disponibles
-  5. .../<nombre de alcaldia> | Obtener la lista de unidades que se encuentren dentro de una alcaldía
+  5. .../{name_alcaldia} | Obtener la lista de unidades que se encuentren dentro de una alcaldía
  
  
  

@@ -55,7 +55,7 @@ def get_available_units():
 
 # Get  list of mayors
 @main.route('/municipal')
-def get_mayors_available():
+def get_municipal_available():
     
     try:
         list_mayors= RecordModel.get_list_of_municipal_available()
