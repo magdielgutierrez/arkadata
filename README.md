@@ -36,7 +36,8 @@ Crear un archivo .env (en la raíz del proyecto) para las variables de entorno:
    
 ### Rutas:
 
-
+| RUTAS                                                                             |        DESCRIPCION |
+|:------------------------------------------------------------------------------------|:--------------------|
 | GET /api/list | Obtener lista de registros | 
 | GET /api/units | Obtener una lista de unidades disponibles | 
 | GET /api/{vehicule_id} | Consultar la ubicación de una unidad dado su ID | 
