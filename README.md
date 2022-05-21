@@ -26,23 +26,22 @@ Crear un archivo .env (en la raíz del proyecto) para las variables de entorno:
    
     MYSQL_DATABASE=database
 
-    MYSQL_PORT=database
+    MYSQL_PORT=port
     
  ## Dockerfile
  
- Crear contenedores
+ Desplegar con docker compose
  
     docker-compose up -d
    
 ### Rutas:
-Home  http://127.0.0.1:8000/api/
 
-  1. .../list  | Obtener lista de registros 
-  2. .../units | Obtener una lista de unidades disponibles  
-  3. .../{vehicule_id} | Consultar la ubicación de una unidad dado su ID
-  4. .../municipal | Obtener una lista de alcaldías disponibles
-  5. .../{name_alcaldia} | Obtener la lista de unidades que se encuentren dentro de una alcaldía
- 
+
+| GET /api/list | Obtener lista de registros | 
+| GET /api/units | Obtener una lista de unidades disponibles | 
+| GET /api/{vehicule_id} | Consultar la ubicación de una unidad dado su ID | 
+| GET /api/municipal | Obtener una lista de alcaldías disponibles |
+| GET /api/{name_alcaldia} | Obtener la lista de unidades que se encuentren dentro de una alcaldía | 
  
  
 
